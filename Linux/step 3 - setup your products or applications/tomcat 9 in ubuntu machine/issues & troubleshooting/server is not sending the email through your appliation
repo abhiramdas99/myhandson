@@ -1,0 +1,29 @@
+Issue 
+===========
+Title  - server is not sending the email through your appliation 
+Descrp - sometimes the tomcat server installed in linux system is not able to send the email throgh your deployed webapplication 
+         even if you tested in local windows machine 
+         
+         
+Solution 
+===========
+soource  - https://serverfault.com/questions/1062435/cannot-send-emails-from-tomcat-application
+
+The problem was with the last versions of Java.
+
+I had installed openjdk 1.8.0_292, since _291, doesn't allow TLS 1.0 and 1.1, protocol that Gmail has by default until today.
+
+So, to be able to solve my problem without install another versions of java, I had edited the file /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/java.security
+
+And commented that part:
+
+#jdk.tls.disabledAlgorithms=SSLv3, TLSv1, TLSv1.1, RC4, DES, MD5withRSA, \
+#DH keySize < 1024, EC keySize < 224, 3DES_EDE_CBC, anon, NULL, \
+#include jdk.disabled.namedCurves
+And add this part right after:
+
+jdk.tls.disabledAlgorithms=SSLv3, RC4, DES, MD5withRSA, \
+DH keySize < 1024, EC keySize < 224, 3DES_EDE_CBC, anon, NULL, \
+include jdk.disabled.namedCurves1
+As you can see, the java had explicity disabled some protocols, returning the COULD NOT CONVERT SOCKET TO TLS error. 
+Hope this help others who may find that problem.
