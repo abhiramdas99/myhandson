@@ -1,0 +1,13 @@
+Objective of this page 
+----------------------------------------------------
+1) Set the hostname and IP address of  this machine
+2) Update the machine with latest package 
+3) install and configure the necessary package for this machine
+            a) ssh  - to take the remote anywhere over the internet 
+            b) java / jdk  - Generally realworld application or any custom application require jvm to run the application. Hence its most important to install and setup
+            c) 
+            
+Above all step in Detail 
+---------------------------------------------------
+
+           
